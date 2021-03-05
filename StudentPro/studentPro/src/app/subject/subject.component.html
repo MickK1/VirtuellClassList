@@ -1,0 +1,13 @@
+<div class="row offset-1">
+    <div class="profile-tabs col-md-3" *ngFor="let subject of subjects">
+    <span (click)="removeSubject(subject)" class="pointer">
+        <ul class="nav nav-pills float-left nav-pills-icons mb-3" role="tablist" id="{{subject}}" >
+            <li class="nav-item text-center ml-5">
+                <div class="nav-link active" role="tab" data-toggle="tab">
+                    <i class="material-icons">view_headline</i>{{subject}}
+                </div>
+            </li>
+        </ul>
+    </span>
+    </div>
+</div>

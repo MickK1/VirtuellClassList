@@ -1,33 +1,30 @@
-import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Student } from '../student';
+import { UserManagmentService } from '../user-managment.service';
 
 @Component({
   selector: 'app-studentporfile',
   templateUrl: './studentporfile.component.html',
   styleUrls: ['./studentporfile.component.css']
 })
-export class StudentporfileComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
+export class StudentporfileComponent implements OnInit {
+  public user: Student;
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  constructor(private userService: UserManagmentService) {
+  }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(){
+    this.userService.userSubject$.subscribe(observer => {
+      this.user = new Student();
+      this.user = observer;
+    });
+  }
+
+  addSubjects(){
+    if($("#Subject").val()){
+      this.user.subjects.push($("#Subject").val().toString());
+      this.userService.userSubject$.next(this.user);
+      $("#Subject").val("");
+    }
+  }
 }
