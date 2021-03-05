@@ -11,19 +11,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
-import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { StudentporfileComponent } from './studentporfile/studentporfile.component';
+import { SubjectComponent } from './subject/subject.component';
+import { UserManagmentService } from './user-managment.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
     LoginComponent,
-    StudentporfileComponent
-    
-    
+    StudentporfileComponent,
+    SubjectComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +35,7 @@ import { StudentporfileComponent } from './studentporfile/studentporfile.compone
     MatButtonModule,
     LayoutModule
   ],
-  providers: [],
+  providers: [UserManagmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
